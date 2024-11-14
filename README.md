@@ -1,7 +1,5 @@
 # TrabalhoDevOps
 
-## GRUPO Tiro e Queda
-
 ### Juan Manfrim Fernandes - R.A:
 ##
 ### Leandro Pinecio Malizan - R.A: 
