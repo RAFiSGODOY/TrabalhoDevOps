@@ -10,7 +10,7 @@ COPY provisioning/datasource.yml /etc/grafana/provisioning/datasources/
 COPY provisioning/dashboard.yml /etc/grafana/provisioning/dashboards/
 COPY dashboards/mariadb_dashboard.json /etc/grafana/provisioning/dashboards/
 
-# Garantir permissões para o usuário grafana
+# Garantir permissões para o usuário grafana (usando o UID e GID padrão do Grafana)
 RUN chown -R 472:472 /etc/grafana/provisioning
 
 USER grafana

@@ -1,11 +1,11 @@
 apiVersion: 1
 
 providers:
-  - name: 'default'
+  - name: 'MariaDB Dashboards'
     orgId: 1
     folder: ''
     type: file
     disableDeletion: false
-    updateIntervalSeconds: 10
+    editable: true
     options:
-      path
+      path: /var/lib/grafana/dashboards

@@ -1,58 +1,69 @@
 {
-  "annotations": {
-    "list": []
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "id": null,
-  "panels": [
-    {
-      "datasource": "MariaDB",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+  "dashboard": {
+    "id": null,
+    "title": "MariaDB Metrics",
+    "tags": ["mariadb", "database"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "panels": [
+      {
+        "type": "graph",
+        "title": "MariaDB Connections",
+        "targets": [
+          {
+            "expr": "mysql_global_status_threads_connected",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "Connected Threads",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "xaxis": {
+          "show": true
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ]
       },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
-      "id": 1,
-      "options": {
-        "showHeader": true
-      },
-      "pluginVersion": "9.0.0",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  UNIX_TIMESTAMP(time_column) as time_sec,\n  value_column as value\nFROM\n  metrics_table\nWHERE\n  $__timeFilter(time_column)",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "metrics_table",
-          "timeColumn": "time_sec",
-          "timeColumnType": "timestamp",
-          "where": []
-        }
-      ],
-      "title": "MariaDB Metrics",
-      "type": "table"
+      {
+        "type": "graph",
+        "title": "MariaDB Queries per Second",
+        "targets": [
+          {
+            "expr": "rate(mysql_global_status_questions[1m])",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "Queries per Second",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "xaxis": {
+          "show": true
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ]
+      }
+    ],
+    "refresh": "5s",
+    "time": {
+      "from": "now-15m",
+      "to": "now"
     }
-  ],
-  "refresh": "5s",
-  "schemaVersion": 30,
-  "version": 1
+  }
 }
