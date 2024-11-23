@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Comandos para construir o projeto
                 sh 'echo "Building the project..."'
-                sh 'sudo docker-compose up --build -d' 
+                sh 'docker-compose up --build -d' 
             }
         }
 
