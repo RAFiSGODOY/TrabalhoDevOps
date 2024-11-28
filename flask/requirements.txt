@@ -6,4 +6,3 @@ Werkzeug==1.0.1  # Versão compatível do Werkzeug para evitar erros de importa�
 MarkupSafe==2.0.1  # Versão compatível com Jinja2 e Flask
 WTForms==2.3.3  # Versão compatível com Flask-AppBuilder que contém o módulo 'compat'
 prometheus-flask-exporter==0.18.3  # Para exportação de métricas Prometheus
-pytest==7.4.0  # Adicionando pytest para testes
