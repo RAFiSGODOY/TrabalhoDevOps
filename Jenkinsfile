@@ -39,7 +39,7 @@ pipeline {
                 dir('flask') {
                     sh '''
                     . venv/bin/activate
-                        python -m unittest discover -s . -p "test_app*.py"
+                    python -m unittest discover -s . -p "test_*.py"
                     '''
                 }
             }
