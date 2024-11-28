@@ -17,7 +17,7 @@ pipeline {
                         if ! command -v python3 &> /dev/null
                         then
                             echo "Python3 não encontrado, instalando..."
-                            sudo apt-get install python3
+                            apt-get install python3
                         fi
                         if ! command -v pip &> /dev/null
                         then
