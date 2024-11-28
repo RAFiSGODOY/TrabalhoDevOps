@@ -22,6 +22,7 @@ def test_cadastro_aluno(client):
         "turma": "1A",
         "disciplinas": "Matemática, Física"
     }
+    #pip
 
     # Realiza o POST para cadastrar o aluno
     response = client.post('/alunos', json=novo_aluno)
