@@ -39,7 +39,7 @@ pipeline {
                 echo 'Executando testes...'
                 dir('flask') {
                     sh '''
-                        source venv/bin/activate
+                        . venv/bin/activate
                         pytest --junitxml=pytest.xml
                     '''
                 }
