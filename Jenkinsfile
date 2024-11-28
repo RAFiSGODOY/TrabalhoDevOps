@@ -4,30 +4,33 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Baixa o código do repositório
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Preparar Ambiente') {
             steps {
-                // Comandos para construir o projeto
-                sh 'echo "Building the project..."'
-                sh 'docker-compose up --build -d' 
+                echo 'Instalando dependências do Python...'
+                dir('flask') {
+                    sh 'pip install -r requirements.txt'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Rodar Testes') {
             steps {
-                // Comandos para rodar os testes
-                sh 'echo "Running tests..."'
+                echo 'Executando testes...'
+                dir('flask') {
+                    // Executar os testes com pytest (test_app.py já verifica o cadastro)
+                    sh 'pytest --junitxml=pytest.xml'
+                }
             }
         }
 
-        stage('Deploy') {
+        stage('Build e Deploy') {
             steps {
-                // Comandos para deploy
-                sh 'echo "Deploying the application..."'
+                echo 'Construindo e subindo os containers Docker...'
+                sh 'docker-compose up --build -d'
             }
         }
     }
