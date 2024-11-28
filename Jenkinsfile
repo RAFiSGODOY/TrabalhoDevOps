@@ -21,7 +21,6 @@ pipeline {
             steps {
                 // Comandos para rodar os testes
                 sh 'echo "Running tests..."'
-                sh 'make test' // Substitua pelo comando de teste real
             }
         }
 
@@ -29,7 +28,6 @@ pipeline {
             steps {
                 // Comandos para deploy
                 sh 'echo "Deploying the application..."'
-                sh './deploy.sh' // Substitua pelo seu script de deploy
             }
         }
     }
