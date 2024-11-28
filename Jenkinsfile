@@ -12,7 +12,29 @@ pipeline {
             steps {
                 echo 'Instalando dependências do Python...'
                 dir('flask') {
-                    sh 'pip install -r requirements.txt'
+                    // Verifica se o Python e o pip estão instalados e instala o pip caso necessário
+                    sh '''
+                        if ! command -v python3 &> /dev/null
+                        then
+                            echo "Python3 não encontrado, instalando..."
+                            sudo apt-get install python3
+                        fi
+                        if ! command -v pip &> /dev/null
+                        then
+                            echo "pip não encontrado, instalando..."
+                            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+                            python3 get-pip.py --user
+                        fi
+
+                        # Criar um ambiente virtual
+                        python3 -m venv venv
+
+                        # Ativar o ambiente virtual
+                        source venv/bin/activate
+
+                        # Instalar as dependências dentro do ambiente virtual
+                        pip install -r requirements.txt
+                    '''
                 }
             }
         }
@@ -21,8 +43,13 @@ pipeline {
             steps {
                 echo 'Executando testes...'
                 dir('flask') {
-                    // Executar os testes com pytest (test_app.py já verifica o cadastro)
-                    sh 'pytest --junitxml=pytest.xml'
+                    sh '''
+                        # Ativar o ambiente virtual
+                        source venv/bin/activate
+
+                        # Rodar os testes
+                        pytest --junitxml=pytest.xml
+                    '''
                 }
             }
         }
