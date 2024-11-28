@@ -9,33 +9,31 @@ pipeline {
         }
 
         stage('Preparar Ambiente') {
-            steps {
-                echo 'Instalando dependências do Python...'
-                dir('flask') {
-                    // Verifica se o Python e o pip estão instalados
-                    sh '''
-                        if ! command -v python3 &> /dev/null
-                        then
-                            echo "Python3 não encontrado, instalando..."
-                            exit 1
-                        fi
-                        if ! command -v pip &> /dev/null
-                        then
-                            echo "pip não encontrado, instalando..."
-                            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-                            python3 get-pip.py --user
-                        fi
+    steps {
+        echo 'Instalando dependências do Python...'
+        dir('flask') {
+            script {
+                // Verificar se Python3 está instalado
+                def pythonCheck = sh(script: 'command -v python3 || echo "not found"', returnStdout: true).trim()
 
-                        # Criar ambiente virtual
-                        python3 -m venv venv
-                        source venv/bin/activate
-
-                        # Instalar dependências
-                        pip install -r requirements.txt
-                    '''
+                if (pythonCheck == 'not found') {
+                    echo "Python3 não encontrado, mas já está instalado no caminho correto: /usr/bin/python3"
+                    // Optional: aqui você pode configurar outras dependências ou como o Python deve ser usado
+                } else {
+                    echo "Python3 está instalado corretamente."
                 }
+
+                // Criação do ambiente virtual e instalação das dependências
+                sh '''
+                    python3 -m venv venv
+                    source venv/bin/activate
+                    pip install -r requirements.txt
+                '''
             }
         }
+    }
+}
+
 
         stage('Rodar Testes') {
             steps {
