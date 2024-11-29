@@ -12,7 +12,7 @@ class TestApp(unittest.TestCase):
     def setUpClass(cls):
         """Configuração inicial antes dos testes."""
         # Configure o banco de dados para os testes
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:password@localhost:3306/dbname'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root_password@mariadb/school_db'
         app.config['TESTING'] = True
         cls.client = app.test_client()  # Cria um cliente para fazer requisições
         db.create_all()  # Cria as tabelas para o teste
