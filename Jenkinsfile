@@ -1,66 +1,51 @@
 pipeline {
     agent any
 
+    environment {
+        REPOSITORY_URL = 'https://github.com/GabNasci/trabalho-devops-2397834.git'
+        BRANCH_NAME = 'main'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Baixar código do Git') {
             steps {
-                checkout scm
+                // Clonar o repositório do Git
+                git branch: "${BRANCH_NAME}", url: "${REPOSITORY_URL}"
             }
         }
 
-        stage('Preparar Ambiente') {
+        stage('Build e Deploy') {
             steps {
-                echo 'Instalando dependências do Python...'
-                dir('flask') {
-                    script {
-                        // Verificar se Python3 está instalado
-                        def pythonCheck = sh(script: 'command -v python3 || echo "not found"', returnStdout: true).trim()
+                script {
+                    // Construir as imagens Docker para cada serviço
+                    sh '''
+                        docker compose build
+                    '''
 
-                        if (pythonCheck == 'not found') {
-                            echo 'Python3 não encontrado!'
-                            error 'Python3 não encontrado'
-                        } else {
-                            echo 'Python3 está instalado corretamente.'
-                        }
-
-                        // Criação do ambiente virtual e instalação das dependências
-                        sh '''
-                            python3 -m venv venv
-                            . venv/bin/activate && pip install -r requirements.txt
-                        '''
-                    }
+                    // Subir os containers do Docker com Docker Compose
+                    sh '''
+                        docker compose up -d
+                    '''
                 }
             }
         }
 
         stage('Rodar Testes') {
             steps {
-                echo 'Executando testes...'
-                dir('flask') {
-                    sh '''
-                    . venv/bin/activate
-                    python -m unittest discover -s . -p "test_*.py"
-                    '''
+                script {
+                    // Rodar os testes com o pytest (ou qualquer outra ferramenta de testes que você esteja utilizando)
+                    sh 'docker compose run --rm test'
                 }
-            }
-        }
-        stage('Build e Deploy') {
-            steps {
-                echo 'Construindo e subindo os containers Docker...'
-                sh 'docker-compose up --build -d'
             }
         }
     }
 
     post {
-        always {
-            echo 'Pipeline finalizado!'
-        }
         success {
-            echo 'Pipeline concluído com sucesso!'
+            echo 'Pipeline executada com sucesso!'
         }
         failure {
-            echo 'Pipeline falhou!'
+            echo 'A pipeline falhou.'
         }
     }
 }
