@@ -8,4 +8,7 @@ COPY provisioning/datasource.yml /etc/grafana/provisioning/datasources/
 COPY provisioning/dashboard.yml /etc/grafana/provisioning/dashboards/
 COPY dashboards/mariadb_dashboard.json /etc/grafana/provisioning/dashboards/
 
+RUN chown -R 472:472 /var/lib/grafana
+
 USER grafana
+
