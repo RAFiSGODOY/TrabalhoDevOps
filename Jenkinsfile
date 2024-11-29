@@ -1,8 +1,8 @@
-pipeline {
+pipeline{
     agent any
 
     environment {
-        REPOSITORY_URL = 'https://github.com/GabNasci/trabalho-devops-2397834.git'
+        REPOSITORY_URL = 'https://github.com/RAFiSGODOY/TrabalhoDevOps'
         BRANCH_NAME = 'main'
     }
 
