@@ -1,12 +1,24 @@
-# Dockerfile (Flask AppBuilder)
+# Use uma imagem slim do Python 3.9
 FROM python:3.9-slim
 
+# Definir o diretório de trabalho no container
 WORKDIR /app
 
+# Copiar o arquivo de dependências
 COPY requirements.txt requirements.txt
+
+# Instalar as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-#COPY . .
-COPY app.py /app/
+# Copiar o código da aplicação para o diretório de trabalho
+COPY . .
 
+# Definir as variáveis de ambiente do Flask
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=development
+
+# Expor a porta que o Flask usará
+EXPOSE 5000
+
+# Comando para rodar a aplicação Flask
 CMD ["flask", "run", "--host=0.0.0.0"]
