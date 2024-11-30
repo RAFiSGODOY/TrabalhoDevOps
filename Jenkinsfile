@@ -30,10 +30,12 @@ pipeline{
             }
         }
 
+
         stage('Rodar Testes') {
             steps {
                 script {
                     // Rodar os testes com o pytest (ou qualquer outra ferramenta de testes que você esteja utilizando)
+                    sh 'sleep 40' 
                     sh 'docker compose run --rm test'
                 }
             }
