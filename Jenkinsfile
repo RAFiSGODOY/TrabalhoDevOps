@@ -19,12 +19,13 @@ pipeline {
                 script {
                     // Construir as imagens Docker para cada serviço
                     sh '''
-                        docker compose build
+                        docker-compose build
+
                     '''
 
                     // Subir os containers do Docker com Docker Compose
                     sh '''
-                        docker compose up -d
+                        docker-compose up -d
                     '''
                 }
             }
@@ -35,7 +36,7 @@ pipeline {
                 script {
                     // Rodar os testes com o pytest (ou qualquer outra ferramenta de testes que você esteja utilizando)
                     sh 'sleep 40' 
-                    sh 'docker compose run --rm test'
+                    sh 'docker-compose run --rm test'
                 }
             }
         }
