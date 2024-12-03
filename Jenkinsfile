@@ -14,7 +14,7 @@ pipeline {
                     sh 'docker --version'
                     
                     // Verificar se o Docker Compose está instalado
-                    sh 'docker-compose --version'
+                    sh 'docker compose --version'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Construir as imagens Docker e subir os containers
-                    sh 'docker-compose up --build -d'
+                    sh 'docker compose up --build -d'
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
                 script {
                     // Rodar os testes com o pytest (ou qualquer outra ferramenta de testes que você esteja utilizando)
                     sh 'sleep 40' // Esperar o ambiente subir completamente
-                    sh 'docker-compose run --rm test' // Subir o container de teste e executar
+                    sh 'docker compose run --rm test' // Subir o container de teste e executar
                 }
             }
         }
