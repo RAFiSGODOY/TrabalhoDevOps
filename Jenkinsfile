@@ -1,8 +1,8 @@
-pipeline{
+pipeline {
     agent any
 
     environment {
-        REPOSITORY_URL = 'https://github.com/RAFiSGODOY/TrabalhoDevOps'
+        REPOSITORY_URL = 'https://github.com/RAFiSGODOY/TrabalhoDevOps.git'
         BRANCH_NAME = 'main'
     }
 
@@ -29,7 +29,6 @@ pipeline{
                 }
             }
         }
-
 
         stage('Rodar Testes') {
             steps {

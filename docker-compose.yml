@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   flask:
     build:
@@ -50,15 +52,12 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
-    # volumes:
-    #   - ./grafana/provisioning:/etc/grafana/provisioning
-    #   - ./grafana/dashboards:/var/lib/grafana/dashboards
 
   test:
     build:
       context: ./flask
       dockerfile: Dockerfile_flask
-    command: ["pytest", "/app/test_flask_app.py"]  # Roda os testes no arquivo test_app.py
+    command: ["pytest", "/app/test_app.py"]  # Roda os testes no arquivo test_app.py
     depends_on:
       - mariadb
       - flask
@@ -66,3 +65,16 @@ services:
       - DATABASE_URL=mysql+pymysql://flask_user:flask_password@mariadb:3306/school_db
     networks:
       - default  # Conecta o contêiner aos mesmos serviços de rede
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - default
+
+volumes:
+  jenkins_home:

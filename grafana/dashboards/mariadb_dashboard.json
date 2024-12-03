@@ -1,72 +1,77 @@
 {
-  "id": null,
-  "title": "Monitoramento de Requisições",
-  "uid": "prom-requests",
+  "uid": "simple_dashboard",
+  "title": "Desempenho HTTP - Métricas Padrão",
+  "tags": ["HTTP", "Prometheus", "Desempenho"],
   "timezone": "browser",
-  "schemaVersion": 36,
+  "schemaVersion": 16,
   "version": 1,
-  "refresh": "5s",
   "panels": [
     {
-      "id": 1,
-      "gridPos": {
-        "x": 0,
-        "y": 0,
-        "w": 24,
-        "h": 9
-      },
       "type": "graph",
-      "title": "Requisições por Segundo (RPS)",
+      "title": "Taxa de Requisições HTTP",
+      "datasource": "Prometheus",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 6 },
       "targets": [
         {
-          "expr": "rate(prometheus_http_requests_total{job=\"prometheus\"}[1m])",
-          "legendFormat": "{{handler}}",
+          "expr": "rate(prometheus_http_requests_total[1m])",
+          "legendFormat": "Requisições/s",
           "refId": "A"
         }
       ],
-      "xaxis": {
-        "mode": "time"
-      },
-      "yaxes": [
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1
+    },
+    {
+      "type": "graph",
+      "title": "Latência Média de Requisições",
+      "datasource": "Prometheus",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 6 },
+      "targets": [
         {
-          "format": "short",
-          "label": "RPS",
-          "logBase": 1,
-          "min": 0
-        },
-        {
-          "format": "short",
-          "logBase": 1
+          "expr": "rate(prometheus_http_request_duration_seconds_sum[1m]) / rate(prometheus_http_request_duration_seconds_count[1m])",
+          "legendFormat": "Latência Média (s)",
+          "refId": "B"
         }
       ],
       "lines": true,
-      "fill": 1,
       "linewidth": 2,
-      "aliasColors": {},
-      "tooltip": {
-        "shared": true,
-        "sort": 0
-      },
-      "legend": {
-        "show": true,
-        "values": true
-      }
+      "fill": 1
+    },
+    {
+      "type": "graph",
+      "title": "Requisições HTTP em Andamento",
+      "datasource": "Prometheus",
+      "gridPos": { "x": 0, "y": 6, "w": 12, "h": 6 },
+      "targets": [
+        {
+          "expr": "promhttp_metric_handler_requests_in_flight",
+          "legendFormat": "Em andamento",
+          "refId": "C"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1
+    },
+    {
+      "type": "graph",
+      "title": "Requisições HTTP - Taxa de Erro",
+      "datasource": "Prometheus",
+      "gridPos": { "x": 12, "y": 6, "w": 12, "h": 6 },
+      "targets": [
+        {
+          "expr": "rate(prometheus_http_requests_total{status!~'2..'}[1m])",
+          "legendFormat": "Taxa de Erro",
+          "refId": "D"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1
     }
   ],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-5m",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m"
-    ]
-  }
+  "refresh": "10s",
+  "time": { "from": "now-1h", "to": "now" },
+  "overwrite": true
 }
