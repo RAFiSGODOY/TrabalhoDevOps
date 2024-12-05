@@ -14,6 +14,8 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
 1. **Jenkins** instalado e em execução.
 2. **Docker** e **Docker Compose** configurados no ambiente do Jenkins.
 3. Acesso ao navegador para visualizar o Grafana no endereço `http://localhost:3000`.
+4. Acesso ao navegador para visualizar o Prometheus no endereço `http://localhost:9090`.
+5. Acesso ao navegador para visualizar o Jenkins no endereço `http://localhost:8080`.
 
 ---
 
