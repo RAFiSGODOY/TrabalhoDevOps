@@ -68,7 +68,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
    - Certifique-se de que a etapa final indica que o serviço Grafana está em execução.
 
     **Tela da Pipeline:**
-   ![alt text](image-3.png)
+   ![alt text](img2-trabdevops.png)
 
 ---
 
