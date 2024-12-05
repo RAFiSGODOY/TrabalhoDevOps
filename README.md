@@ -37,7 +37,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
 
 3. **Criar um Novo Item**
    - Clique em **"Nova Tarefa"**.
-   - Digite um nome para o pipeline, como `Pipeline-Grafana`.
+   - Digite um nome para o pipeline, como `New teste1`.
    - Selecione a opção **"Pipeline"** e clique em **"OK"**.
 
    **Tela de criação de Pipeline:**
@@ -54,7 +54,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
 
 5. **Configurar Repositório SCM**
    - Em **SCM**, selecione **Git**.
-   - Insira o repositório Git onde o projeto está hospedado: `https://github.com/GabNasci/trabalho-devops-2397834.git`.
+   - Insira o repositório Git onde o projeto está hospedado: `https://github.com/RAFiSGODOY/TrabalhoDevOps.git`.
    - Configure as credenciais, se necessário.
    - Clique em **Salvar**.
 
