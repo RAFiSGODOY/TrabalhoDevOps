@@ -98,7 +98,7 @@ Caso não deseje utilizar o Jenkins para rodar o projeto, é possível executá-
 3. Verifique o dashboard provisionado automaticamente e visualize as métricas de requisições.
 
    **Dashboard que você verá no Grafana:**
-   ![alt text](img3-trabdevops)
+   ![alt text](img3-trabdevops.png)
 
    **Observação**: O carregamento dos gráficos do dashboard pode demorar aproximadamente **30 segundos** após acessar a aplicação (Também recomendo configurar o **time range** do dashboard em `last 5 minutes`).
 
