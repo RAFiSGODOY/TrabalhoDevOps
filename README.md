@@ -32,9 +32,9 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
    - Vá até o Jenkins em `http://localhost:8080` e faça login.
 
    **Tela Inicial do Jenkins:**
-   ![alt text](image.png)
+   ![alt text](telaini.png)
 
-2. **Criar um Novo Item**
+3. **Criar um Novo Item**
    - Clique em **"Nova Tarefa"**.
    - Digite um nome para o pipeline, como `Pipeline-Grafana`.
    - Selecione a opção **"Pipeline"** e clique em **"OK"**.
@@ -42,7 +42,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
    **Tela de criação de Pipeline:**
     ![alt text](image-1.png)
 
-3. **Configurar o Pipeline**
+4. **Configurar o Pipeline**
    - Na página de configuração do pipeline:
      - Role até a seção **Build Triggers** e selecione **Consultar periodicamente o SCM**.
      - Adicione o seguinte texto para que o Jenkins verifique o repositório periodicamente: `H/5 * * * *`.
@@ -51,7 +51,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
    **Tela de configuração de Pipeline:**
    ![alt text](image-2.png)
 
-4. **Configurar Repositório SCM**
+5. **Configurar Repositório SCM**
    - Em **SCM**, selecione **Git**.
    - Insira o repositório Git onde o projeto está hospedado: `https://github.com/GabNasci/trabalho-devops-2397834.git`.
    - Configure as credenciais, se necessário.
