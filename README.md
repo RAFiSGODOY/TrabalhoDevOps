@@ -30,9 +30,10 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
 
 1. **Acessar o Jenkins**
    - Vá até o Jenkins em `http://localhost:8080` e faça login.
+  
 
    **Tela Inicial do Jenkins:**
-   ![alt text](telaini.png)
+   ![alt text](telaIni.png)
 
 3. **Criar um Novo Item**
    - Clique em **"Nova Tarefa"**.
@@ -40,7 +41,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
    - Selecione a opção **"Pipeline"** e clique em **"OK"**.
 
    **Tela de criação de Pipeline:**
-    ![alt text](image-1.png)
+    ![alt text](c-pipeline.png)
 
 4. **Configurar o Pipeline**
    - Na página de configuração do pipeline:
@@ -49,7 +50,7 @@ Este projeto provisiona automaticamente um ambiente de monitoramento usando o Gr
      - Role até a seção **Pipeline** e selecione a opção **Pipeline Script from SCM**.
 
    **Tela de configuração de Pipeline:**
-   ![alt text](image-2.png)
+   ![alt text](telaJenkins.png)
 
 5. **Configurar Repositório SCM**
    - Em **SCM**, selecione **Git**.
